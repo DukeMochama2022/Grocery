@@ -14,11 +14,13 @@ import ProductDetails from "./pages/ProductDetails";
 import WishList from "./pages/WishList";
 import NavBar from "./components/NavBar";
 import { useLocation } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const adminPath = useLocation().pathname.includes("admin");
   return (
     <>
+      <Toaster />
       <div>
         {!adminPath && <NavBar />}
         <Routes>

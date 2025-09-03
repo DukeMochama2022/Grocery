@@ -6,9 +6,10 @@ import { Heart, ShoppingCart } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 const NavBar = () => {
-  const { navigate } = useContext(AppContext);
+  const { navigate, user, setUser } = useContext(AppContext);
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
@@ -16,6 +17,12 @@ const NavBar = () => {
     return location.pathname === path
       ? "text-secondary border-b border-primary"
       : "";
+  };
+
+  const logout = () => {
+    setUser(null);
+    toast.success("Logout successful");
+    navigate("/");
   };
   return (
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
@@ -56,12 +63,41 @@ const NavBar = () => {
           </button>
         </div>
 
-        <button
-          onClick={() => navigate("/login")}
-          className="cursor-pointer px-8 py-2 bg-primary hover:bg-secondary transition text-white rounded-full"
-        >
-          Login
-        </button>
+        {user ? (
+          <div className="relative group">
+            <img
+              src={assets.profile_pic}
+              alt=""
+              className="w-10 h-10 rounded-full cursor-pointer"
+            />
+            <div
+              className="absolute right-0 mt-2 w-40 bg-secondary  shadow-lg rounded-lg  opacity-0 
+            group-hover:opacity-100 group-hover:visible invisible transition duration-300 z-50"
+            >
+              <ul className="text-white">
+                <p
+                  onClick={() => navigate("/my-orders")}
+                  className="cursor-pointer px-3 py-1 hover:bg-primary "
+                >
+                  My orders
+                </p>
+                <p
+                  onClick={logout}
+                  className="cursor-pointer px-3 py-1 hover:bg-primary "
+                >
+                  Logout
+                </p>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <button
+            onClick={() => navigate("/login")}
+            className="cursor-pointer px-8 py-2 bg-primary hover:bg-secondary transition text-white rounded-full"
+          >
+            Login
+          </button>
+        )}
       </div>
 
       <button
@@ -113,12 +149,41 @@ const NavBar = () => {
         >
           Contact
         </Link>
-        <button
-          onClick={() => navigate("/login")}
-          className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-secondary transition text-white rounded-full text-sm"
-        >
-          Login
-        </button>
+        {user ? (
+          <div className="relative group">
+            <img
+              src={assets.profile_pic}
+              alt=""
+              className="w-10 h-10 rounded-full cursor-pointer"
+            />
+            <div
+              className="absolute right-0 mt-2 w-40 bg-secondary  shadow-lg rounded-lg  opacity-0 
+            group-hover:opacity-100 group-hover:visible invisible transition duration-300 z-50"
+            >
+              <ul className="text-white">
+                <p
+                  onClick={() => navigate("/my-orders")}
+                  className="cursor-pointer px-3 py-1 hover:bg-primary "
+                >
+                  My orders
+                </p>
+                <p
+                  onClick={logout}
+                  className="cursor-pointer px-3 py-1 hover:bg-primary "
+                >
+                  Logout
+                </p>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <button
+            onClick={() => navigate("/login")}
+            className="cursor-pointer px-8 py-2 bg-primary hover:bg-secondary transition text-white rounded-full"
+          >
+            Login
+          </button>
+        )}
       </div>
     </nav>
   );
