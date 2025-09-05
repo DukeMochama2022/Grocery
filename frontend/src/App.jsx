@@ -21,7 +21,7 @@ const App = () => {
   return (
     <>
       <Toaster />
-      <div>
+      <div className="w-full mx-auto px-4 md:px-6 lg:px-8">
         {!adminPath && <NavBar />}
         <Routes>
           <Route path="/" element={<Home />} />
