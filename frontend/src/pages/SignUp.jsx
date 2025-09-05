@@ -72,7 +72,7 @@ const SignUp = () => {
             />
           </div>
           <button className="bg-primary text-white  cursor-pointer w-full py-3 rounded">
-            SignUp
+            Sign Up
           </button>
           <p className="mt-3 text-center">
             Already have an account?{" "}

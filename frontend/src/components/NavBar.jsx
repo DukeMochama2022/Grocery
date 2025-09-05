@@ -66,7 +66,7 @@ const NavBar = () => {
         {user ? (
           <div className="relative group">
             <img
-              src={assets.profile_pic}
+              src={assets.image1}
               alt=""
               className="w-10 h-10 rounded-full cursor-pointer"
             />
@@ -123,7 +123,7 @@ const NavBar = () => {
       <div
         className={`${
           open ? "flex" : "hidden"
-        } absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}
+        } absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 z-50 px-5 text-sm md:hidden`}
       >
         <Link to={"/"} onClick={() => setOpen(false)} className={isActive("/")}>
           Home
@@ -152,7 +152,7 @@ const NavBar = () => {
         {user ? (
           <div className="relative group">
             <img
-              src={assets.profile_pic}
+              src={assets.image1}
               alt=""
               className="w-10 h-10 rounded-full cursor-pointer"
             />

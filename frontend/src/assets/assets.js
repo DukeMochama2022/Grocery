@@ -15,9 +15,10 @@ import pink_bg from "./pink_bg.jpg";
 import vegetables_left from "./vegetables_left.webp";
 import organic_fruits from "./organic_fruits.webp";
 import organic_vegetables from "./organic_vegetables.webp";
-import profile_pic from "./profile_pic.webp";
+import image1 from "./Image1.jpg";
 import about_hero from "./about_hero.webp";
-import grocery_logo from './grocery_logo.png'
+import grocery_logo from "./grocery_logo.png";
+
 // blogs images
 import blog_1 from "./blog_1.webp";
 import blog_2 from "./blog_2.webp";
@@ -87,7 +88,7 @@ export const assets = {
   vegetables_left,
   organic_fruits,
   organic_vegetables,
-  profile_pic,
+  image1,
   about_hero,
 };
 export const categories = [
