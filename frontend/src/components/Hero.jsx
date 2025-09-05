@@ -41,7 +41,7 @@ const Hero = () => {
       {slides.map((slide, index) => (
         <SwiperSlide key={index}>
           <div
-            className="bg-[#D8E7C7] h-[600px] bg-cover bg-center  flex flex-col md:flex-row  
+            className="bg-[#D8E7C7] h-[550px] bg-cover bg-center  flex flex-col md:flex-row  
           items-center justify-center gap-4"
             style={{ backgroundImage: `url(${assets.leef_layer_bg})` }}
           >
