@@ -24,7 +24,6 @@ const Product = () => {
           <ProductCard
             key={product._id}
             product={product}
-            navigate={navigate}
           />
         ))}
       </div>

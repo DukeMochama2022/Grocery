@@ -3,8 +3,8 @@ import React from "react";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
-const ProductCard = ({ product, navigate }) => {
-    const {currency}=useContext(AppContext)
+const ProductCard = ({ product }) => {
+  const { currency, navigate } = useContext(AppContext);
   return (
     <div
       className="w-[250px] h-[350px] rounded-xl b-[#FAFAFA] p-[20px] hover:border hover:border-secondary hover:transform 
