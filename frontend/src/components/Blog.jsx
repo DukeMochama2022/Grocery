@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
-import { assets } from "../assets/assets";
+
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
@@ -8,6 +8,14 @@ const Blog = () => {
   const { blogsData } = useContext(AppContext);
   return (
     <div className="py-12">
+      <div className="flex items-center">
+        <h2 className="max-w-lg text-lg font-medium">Blogs</h2>
+        <div className="ml-1 w-20 flex border-b  border-secondary border-2"></div>
+      </div>
+      <h2 className="mt-4 text-secondary font-extrabold text-3xl">
+        Find Out Interesting Blogs
+      </h2>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center justify-center">
         {blogsData.map((blog) => (
           <div key={blog._id}>

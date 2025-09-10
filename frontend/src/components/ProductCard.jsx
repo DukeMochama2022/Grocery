@@ -10,7 +10,10 @@ const ProductCard = ({ product }) => {
       className="w-[250px] h-[350px] rounded-xl b-[#FAFAFA] p-[20px] hover:border hover:border-secondary hover:transform 
     hover:scale-105 transition-all ease-in-out duration-300"
     >
-      <p>{product.weight}</p>
+      <div className="flex justify-between gap-4">
+        <p>{product.weight}</p>
+        <h3 className="text-primary font-bold ">{product.discount}</h3>
+      </div>
       <div className="cursor-pointer">
         <img src={product.images[0]} alt="" />
       </div>

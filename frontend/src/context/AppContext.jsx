@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { categories } from "../assets/assets";
-import { products, blogs } from "../assets/assets";
+import { products, categories, blogs } from "../assets/assets";
 import { useEffect } from "react";
 
 export const AppContext = createContext();

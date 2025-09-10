@@ -111,6 +111,7 @@ export const products = [
     longDesc:
       "Premium organic cashews packed with nutrition. Perfect for snacking or adding to recipes.",
     weight: "250g",
+    discount:"20% off",
     category: "Dry Fruits",
     images: [cashews1, cashews2],
   },
@@ -123,6 +124,7 @@ export const products = [
     longDesc:
       "Hand-picked sweet corn rich in fiber and vitamins. Great for soups, salads, and snacks.",
     weight: "500g",
+    discount:"10% off",
     category: "Vegetables",
     images: [corn1, corn2],
   },
@@ -147,6 +149,7 @@ export const products = [
     longDesc:
       "Organic bottle gourd, rich in water content and essential nutrients.",
     weight: "1kg",
+    discount:"5% off",
     category: "Vegetables",
     images: [gourd1, gourd2],
   },
@@ -159,6 +162,7 @@ export const products = [
     longDesc:
       "Farm fresh button mushrooms, ideal for stir-fry, pasta, and pizzas.",
     weight: "200g",
+    discount:"10% off",
     category: "Vegetables",
     images: [mushrooms1, mushrooms2],
   },
@@ -171,6 +175,7 @@ export const products = [
     longDesc:
       "Organic broccoli packed with antioxidants and vitamins. A must-have for healthy meals.",
     weight: "400g",
+    discount:"15% off",
     category: "Vegetables",
     images: [organic_broccoli1, organic_broccoli2],
   },
@@ -183,29 +188,32 @@ export const products = [
     longDesc:
       "Fresh green peas full of flavor. Perfect for curries, soups, and rice dishes.",
     weight: "500g",
+    discount:"10% off",
     category: "Vegetables",
     images: [peas1, peas2],
   },
   {
     _id: 8,
     name: "Fresh Potatoes",
-    price: 2.99,
+    price: 4.99,
     offerPrice: 1.99,
     smallDesc: "Staple food ingredient.",
     longDesc:
       "High-quality farm fresh potatoes. Ideal for fries, curries, and daily meals.",
     weight: "2kg",
+    discount:"30% off",
     category: "Vegetables",
     images: [potatos1, potatos2],
   },
   {
     _id: 9,
     name: "Organic Pumpkin",
-    price: 4.5,
+    price: 6.5,
     offerPrice: 3.5,
     smallDesc: "Rich in beta carotene.",
     longDesc: "Fresh organic pumpkin, great for soups, pies, and curries.",
     weight: "1kg",
+    discount:"35% off",
     category: "Vegetables",
     images: [pumpkin1, pumpkin2],
   },
@@ -218,6 +226,7 @@ export const products = [
     longDesc:
       "Premium quality raisins packed with natural sweetness and energy.",
     weight: "250g",
+    discount:"12% off",
     category: "Dry Fruits",
     images: [raisins1, raisins2],
   },
@@ -230,6 +239,7 @@ export const products = [
     longDesc:
       "Farm fresh red cabbage, grown with care and packed with natural goodness. Its vibrant purple-red leaves are crisp, tender, and loaded with vitamins, minerals, and antioxidants that support a healthy lifestyle. Perfect for adding color and crunch to fresh salads, enhancing flavor in stir-fries, or making delicious homemade pickles. Whether enjoyed raw, sautéed, or fermented, this versatile vegetable brings both nutrition and taste to your everyday meals.",
     weight: "1kg",
+    discount:"10% off",
     category: "Vegetables",
     images: [redcabbage1, redcabbage2],
   },

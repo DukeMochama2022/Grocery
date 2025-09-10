@@ -4,6 +4,8 @@ import Category from "../components/Category";
 import Product from "../components/Product";
 import CallToAction from "../components/CallToAction";
 import Blog from "../components/Blog";
+import Brand from "../components/Brand";
+import NewsLetter from "../components/NewsLetter";
 
 const Home = () => {
   return (
@@ -12,7 +14,9 @@ const Home = () => {
       <Category />
       <Product />
       <CallToAction />
-      <Blog/>
+      <Blog />
+      <Brand />
+      <NewsLetter />
     </div>
   );
 };
