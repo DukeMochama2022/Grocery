@@ -6,6 +6,7 @@ import CallToAction from "../components/CallToAction";
 import Blog from "../components/Blog";
 import Brand from "../components/Brand";
 import NewsLetter from "../components/NewsLetter";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       <Blog />
       <Brand />
       <NewsLetter />
+      
     </div>
   );
 };

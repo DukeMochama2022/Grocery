@@ -15,6 +15,7 @@ import WishList from "./pages/WishList";
 import NavBar from "./components/NavBar";
 import { useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import Footer from "./components/Footer";
 
 const App = () => {
   const adminPath = useLocation().pathname.includes("admin");
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/wishlist" element={<WishList />} />
         </Routes>
+        {!adminPath && <Footer />}
       </div>
     </>
   );

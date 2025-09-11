@@ -1,5 +1,6 @@
 import { ShoppingCart } from "lucide-react";
 import React from "react";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
@@ -15,7 +16,9 @@ const ProductCard = ({ product }) => {
         <h3 className="text-primary font-bold ">{product.discount}</h3>
       </div>
       <div className="cursor-pointer">
-        <img src={product.images[0]} alt="" />
+        <Link to={`/product/${product._id}`} className="cursor-pointer">
+          <img src={product.images[0]} alt="" />
+        </Link>
       </div>
       <button className="flex items-center justify-center rounded mb-3 w-full py-1 bg-secondary text-white cursor-pointer">
         <ShoppingCart />

@@ -107,7 +107,7 @@ const Contact = () => {
               <MapPin className="text-primary w-6 h-6 mt-1" />
               <p>
                 <span className="font-medium">Address:</span> <br />
-                123 Fresh Market Street, Nairobi, Kenya
+                400-200 Fresh Market Street, Nairobi, Kenya
               </p>
             </li>
             <li className="flex items-start gap-3">
