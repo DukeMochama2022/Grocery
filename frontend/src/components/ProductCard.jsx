@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
 const ProductCard = ({ product }) => {
-  const { currency, navigate } = useContext(AppContext);
+  const { currency, navigate, addToCart } = useContext(AppContext);
   return (
     <div
       className="w-[250px] h-[350px] rounded-xl b-[#FAFAFA] p-[20px] hover:border hover:border-secondary hover:transform 
@@ -20,7 +20,10 @@ const ProductCard = ({ product }) => {
           <img src={product.images[0]} alt="" />
         </Link>
       </div>
-      <button className="flex items-center justify-center rounded mb-3 w-full py-1 bg-secondary text-white cursor-pointer">
+      <button
+        onClick={() => addToCart(product)}
+        className="flex items-center justify-center rounded mb-3 w-full py-1 bg-secondary text-white cursor-pointer"
+      >
         <ShoppingCart />
       </button>
       <hr className="w-full" />
