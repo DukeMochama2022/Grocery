@@ -34,7 +34,7 @@ const AppContextProvider = ({ children }) => {
   const addToCart = (product) => {
     setCart((prev) => {
       const newCart = structuredClone(prev);
-      const existingProduct = newCart.find((item) => item.id === product._id);
+      const existingProduct = newCart.find((item) => item._id === product._id);
       if (existingProduct) {
         existingProduct.quantity += 1;
       } else {
@@ -68,7 +68,7 @@ const AppContextProvider = ({ children }) => {
         newFavourite.push(product);
         toast.success("Product added to favourite.");
       } else {
-        toast.error("Product alreaded added to favourite.");
+        toast.error("Product already added to favourite.");
       }
       return newFavourite;
     });

@@ -45,17 +45,23 @@ const NavBar = () => {
           Contact
         </Link>
 
-        <div className="relative cursor-pointer">
+        <div
+          className="relative cursor-pointer"
+          onClick={() => navigate("/cart")}
+        >
           <ShoppingCart className="w-5 h-5" />
           <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">
-            {cart ? cart.length :0}
+            {cart ? cart.length : 0}
           </button>
         </div>
 
-        <div className="relative cursor-pointer">
+        <div
+          className="relative cursor-pointer"
+          onClick={() => navigate("/wishlist")}
+        >
           <Heart className="w-5 h-5" />
           <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">
-          {favourite ? favourite.length :0}
+            {favourite ? favourite.length : 0}
           </button>
         </div>
 

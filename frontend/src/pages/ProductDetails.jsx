@@ -22,7 +22,7 @@ const ProductDetails = () => {
         if (product.images && product.images.length > 0) {
           setMainImage(product.images[0]);
         }
-      }
+      }``
       const relatedProducts = productsData.filter(
         (item) => item.category === product.category
       );
@@ -73,7 +73,7 @@ const ProductDetails = () => {
               {product.price}
             </h2>
 
-            <h2 className="text-lg font-bold  text-gray-800">
+            <h2 className="text-lg font-bold  text-primary">
               {currency}
               {product.offerPrice}
             </h2>
