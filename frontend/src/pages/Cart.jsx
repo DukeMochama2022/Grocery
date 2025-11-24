@@ -43,17 +43,26 @@ const Cart = () => {
                   <CircleX />
                 </p>
               </div>
+              <hr className="text-gray-300" />
             </div>
           ))}
         </ul>
-        <hr className="my-2 w-full text-gray-200" />
+        {/* <hr className="my-2 w-full text-gray-200" /> */}
         <div>
-          <div className="flex items-center justify-between ">
+          <div className="flex mt-5 items-center justify-between ">
             <p className="font-semibold">Total</p>
             <p className="font-semibold">
               {currency}
               {getCartTotal()}
             </p>
+          </div>
+          <div className="flex mt-5 items-center justify-center">
+            <button
+              onClick={() => navigate("/checkout")}
+              className="bg-secondary py-2 px-3 rounded-lg uppercase w-full text-white hover:bg-primary cursor-pointer"
+            >
+              Procceed to Checkout
+            </button>
           </div>
         </div>
       </div>

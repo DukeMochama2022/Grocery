@@ -291,4 +291,11 @@ export const myOrders = [
     totalAmount: 7,
     paymentMethod: "ONLINE",
   },
+  {
+    _id: 4,
+    date: "2025-11-25",
+    status: "Cancelled",
+    totalAmount: 35,
+    paymentMethod: "COD",
+  },
 ];

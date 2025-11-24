@@ -75,11 +75,10 @@ const AppContextProvider = ({ children }) => {
   };
 
   //remove from favourite
-  const removeFromFavourite = () => {
+  const removeFromFavourite = (id) => {
     setFavourite((prev) => {
       const newFavourite = structuredClone(prev);
       const removed = newFavourite.filter((item) => item._id !== id);
-      return newFavourite;
       toast.success("Product removed from Favourites!");
       return removed;
     });
