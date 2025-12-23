@@ -10,6 +10,7 @@ export const AppContext = createContext();
 const AppContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(null);
   const [categoriesData, setCategoriesData] = useState([]);
   const [productsData, setProductsData] = useState([]);
   const [blogsData, setBlogsData] = useState([]);
@@ -100,6 +101,8 @@ const AppContextProvider = ({ children }) => {
     navigate,
     user,
     setUser,
+    admin,
+    setAdmin,
     categoriesData,
     productsData,
     currency,

@@ -13,11 +13,22 @@ import MyOrders from "./pages/MyOrders";
 import ProductDetails from "./pages/ProductDetails";
 import WishList from "./pages/WishList";
 import NavBar from "./components/NavBar";
+import AdminLayout from "./pages/admin/AdminLayout";
+import Dashboard from "./pages/admin/Dashboard";
+import AddCategory from "./pages/admin/AddCategory";
+import AllCategories from "./pages/admin/AllCategories";
+import AddProduct from "./pages/admin/AddProduct";
+import AllProducts from "./pages/admin/AllProducts";
+import Orders from "./pages/admin/Orders";
+import AdminLogin from "./pages/admin/AdminLogin";
 import { useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer";
+import { useContext } from "react";
+import { AppContext } from "./context/AppContext";
 
 const App = () => {
+  const { admin } = useContext(AppContext);
   const adminPath = useLocation().pathname.includes("admin");
   return (
     <>
@@ -37,6 +48,34 @@ const App = () => {
           <Route path="/my-orders" element={<MyOrders />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/wishlist" element={<WishList />} />
+
+          {/* Admin routes */}
+          <Route
+            path="/admin"
+            element={admin ? <AdminLayout /> : <AdminLogin />}
+          >
+            <Route index element={admin ? <Dashboard /> : <AdminLogin />} />
+            <Route
+              path="add-category"
+              element={admin ? <AddCategory /> : <AdminLogin />}
+            />
+            <Route
+              path="categories"
+              element={admin ? <AllCategories /> : <AdminLogin />}
+            />
+            <Route
+              path="add-product"
+              element={admin ? <AddProduct /> : <AdminLogin />}
+            />
+            <Route
+              path="products"
+              element={admin ? <AllProducts /> : <AdminLogin />}
+            />
+            <Route
+              path="orders"
+              element={admin ? <Orders /> : <AdminLogin />}
+            />
+          </Route>
         </Routes>
         {!adminPath && <Footer />}
       </div>

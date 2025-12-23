@@ -44,6 +44,12 @@ const NavBar = () => {
         <Link to={"/contact"} className={isActive("/contact")}>
           Contact
         </Link>
+        <button
+          onClick={() => navigate("/admin")}
+          className="bg-primary text-white px-6 py-2 cursor-pointer rounded-full"
+        >
+          Admin Dashboard
+        </button>
 
         <div
           className="relative cursor-pointer"
@@ -151,6 +157,12 @@ const NavBar = () => {
         >
           Contact
         </Link>
+        <button
+          onClick={() => navigate("/admin")}
+          className="bg-primary text-white px-4 py-2 cursor-pointer rounded-full"
+        >
+          Admin Dashboard
+        </button>
         {user ? (
           <div className="relative group">
             <img
