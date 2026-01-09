@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 import {
   Grid3X3,
@@ -163,6 +163,13 @@ const AdminLayout = () => {
             </div>
           </div>
         </header>
+        {/* Page content */}
+        <main className="flex-1 overflow-x-hidden overflow-y-auto p-6">
+          <div className="max-w-7xl mx-auto">
+            <Outlet/>
+          </div>
+
+        </main>
       </div>
     </div>
   );
