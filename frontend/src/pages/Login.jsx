@@ -5,9 +5,10 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+import axios from "axios";
 
 const Login = () => {
-  const { navigate, setUser } = useContext(AppContext);
+  const { navigate, setUser, backendUrl } = useContext(AppContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,12 +18,27 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    toast.success("Login successful");
-    setUser(true);
-    navigate("/");
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/auth/login",
+        formData
+      );
+      if (data.success) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+      setUser(true);
+      navigate("/");
+    } catch (error) {
+      const msg =
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong!";
+      toast.error(msg);
+    }
   };
   return (
     <div

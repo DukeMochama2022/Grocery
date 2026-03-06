@@ -7,9 +7,9 @@ import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
 const SignUp = () => {
-  const { navigate } = useContext(AppContext);
+  const { navigate, backendUrl, axios } = useContext(AppContext);
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
   });
@@ -18,11 +18,26 @@ const SignUp = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    toast.success("SignUp successful!");
-    navigate("/");
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/auth/signup",
+        formData
+      );
+      if (data.success) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+      navigate("/login");
+    } catch (error) {
+      const msg =
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong!";
+      toast.error(msg);
+    }
   };
   return (
     <div
@@ -43,8 +58,8 @@ const SignUp = () => {
               type="text"
               placeholder="Enter  your username"
               required
-              name="username"
-              value={formData.username}
+              name="name"
+              value={formData.name}
               onChange={handleChange}
               className="w-full outline-none  border border-white  py-3 p-2 rounded"
             />

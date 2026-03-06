@@ -1,26 +1,34 @@
 import React from "react";
 import { Users, ShoppingCart, DollarSign, Package } from "lucide-react";
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext";
 
 const Dashboard = () => {
+  const { stats } = useContext(AppContext);
   const data = [
     {
+      title: "Total categories",
+      value: stats.categories,
+      icon: Package,
+    },
+    {
       title: "Total products",
-      value: "2,847",
+      value: stats.products,
       icon: Package,
     },
     {
       title: "Total customers",
-      value: "18,432",
+      value: stats.users,
       icon: Users,
     },
     {
       title: "Total orders",
-      value: "9,857",
+      value: stats.orders,
       icon: ShoppingCart,
     },
     {
       title: "Total Revenue",
-      value: "$432,359",
+      value: stats.totalRevenue,
       icon: DollarSign,
     },
   ];

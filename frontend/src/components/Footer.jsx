@@ -4,52 +4,79 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div
-      className="py-12 mt-4 bg-[#155136] "
+    <footer
+      className="mt-10 bg-[#155136] text-white"
       style={{ backgroundImage: `url(${assets.footer_img})` }}
     >
-      <div className="flex flex-wrap items-center justify-center gap-10 ">
-        <div>
-          <img src={assets.logo} alt="" className="w-32 h-32 " />
-          <h3 className="text-white max-w-lg text-center px-4">
-            Farm Fresh • Affordable • Reliable
-          </h3>
-        </div>
-        <div className="flex flex-col justify-center items-center text-white">
-          <h1 className="text-2xl font-semibold">Pages</h1>
-          <Link to={"/"}>Home</Link>
-          <Link to={"/shop"}>Shop</Link>
-          <Link to={"/about"}>About</Link>
-          <Link to={"/contact"}>Contact</Link>
-        </div>
+      <div className="max-w-7xl mx-auto px-6 py-12">
 
-        <div className="flex flex-col justify-center items-center text-white">
-          <h1 className="text-2xl font-semibold">Help Center</h1>
-          <Link to={""}>Payment</Link>
-          <Link to={""}>Shipping</Link>
-          <Link to={""}>Product Returns</Link>
-          <Link to={""}>CheckOut</Link>
-        </div>
-
-        <div className="flex flex-col justify-center items-center text-white">
-          <h1 className="text-2xl font-semibold">Pages</h1>
-          <Link to={"/"}>Home</Link>
-          <Link to={"/shop"}>Shop</Link>
-          <Link to={"/about"}>About</Link>
-          <Link to={"/contact"}>Contact</Link>
-        </div>
-
-        <div className="flex flex-col justify-center items-center text-white">
-          <h1 className="text-2xl font-semibold">Download App</h1>
-          <div className="flex items-center mt-2 cursor-pointer">
-            <img src={assets.app_store} alt="" />
+        {/* GRID */}
+        <div className="
+          grid 
+          grid-cols-1 
+          sm:grid-cols-2 
+          lg:grid-cols-4 
+          gap-10
+          text-center
+          sm:text-left
+        ">
+          
+          {/* LOGO */}
+          <div className="flex flex-col items-center sm:items-start">
+            <img src={assets.logo} alt="logo" className="w-28 mb-3" />
+            <p className="text-sm opacity-90">
+              Farm Fresh • Affordable • Reliable
+            </p>
           </div>
-          <div className="flex items-center mt-2 cursor-pointer">
-            <img src={assets.play_store} alt="" />
+
+          {/* PAGES */}
+          <div>
+            <h1 className="text-xl font-semibold mb-3">Pages</h1>
+            <div className="flex flex-col gap-2">
+              <Link className="hover:text-gray-300 transition" to="/">Home</Link>
+              <Link className="hover:text-gray-300 transition" to="/shop">Shop</Link>
+              <Link className="hover:text-gray-300 transition" to="/about">About</Link>
+              <Link className="hover:text-gray-300 transition" to="/contact">Contact</Link>
+            </div>
           </div>
+
+          {/* HELP */}
+          <div>
+            <h1 className="text-xl font-semibold mb-3">Help Center</h1>
+            <div className="flex flex-col gap-2">
+              <Link className="hover:text-gray-300 transition" to="">Payment</Link>
+              <Link className="hover:text-gray-300 transition" to="">Shipping</Link>
+              <Link className="hover:text-gray-300 transition" to="">Product Returns</Link>
+              <Link className="hover:text-gray-300 transition" to="">Checkout</Link>
+            </div>
+          </div>
+
+          {/* DOWNLOAD */}
+          <div className="flex flex-col items-center sm:items-start">
+            <h1 className="text-xl font-semibold mb-3">Download App</h1>
+
+            <img
+              src={assets.app_store}
+              alt="App store"
+              className="w-36 mb-2 cursor-pointer hover:scale-105 transition"
+            />
+
+            <img
+              src={assets.play_store}
+              alt="Play store"
+              className="w-36 cursor-pointer hover:scale-105 transition"
+            />
+          </div>
+
         </div>
+
+        {/* BOTTOM LINE */}
+        <div className="border-t border-white/20 mt-10 pt-6 text-center text-sm opacity-80">
+          © {new Date().getFullYear()} FarmFresh. All rights reserved.
+        </div>
+
       </div>
-    </div>
+    </footer>
   );
 };
 

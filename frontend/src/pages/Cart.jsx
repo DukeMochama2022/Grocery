@@ -4,8 +4,9 @@ import { AppContext } from "../context/AppContext";
 import { CircleX } from "lucide-react";
 
 const Cart = () => {
-  const { cart, currency, navigate, deleteFromCart, getCartTotal } =
+  const { cart, currency, navigate, deleteFromCart, getCartTotal, backendUrl } =
     useContext(AppContext);
+
   return (
     <div className="py-12">
       <h1 className="text-3xl font-bold"> My Cart</h1>
@@ -20,10 +21,15 @@ const Cart = () => {
         <hr className="my-2 w-full text-gray-200" />
         <ul>
           {cart.map((item) => (
+            
             <div key={item._id}>
               <div className="grid grid-cols-5 items-center mb-4">
                 <div>
-                  <img src={item.images[0]} className="w-20 h-20" alt="" />
+                  <img
+                    src={backendUrl+`${item.images?.[0]}`}
+                    className="w-20 h-20"
+                    alt=""
+                  />
                   <p>{item.name}</p>
                 </div>
 

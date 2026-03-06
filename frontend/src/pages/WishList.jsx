@@ -2,10 +2,10 @@ import React from "react";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { BadgePlusIcon, CircleX } from "lucide-react";
-import { ShoppingBasket } from "lucide-react";
+
 
 const WishList = () => {
-  const { favourite, removeFromFavourite, addToCart, currency } =
+  const { favourite, removeFromFavourite, addToCart, currency,backendUrl } =
     useContext(AppContext);
   return (
     <div className="py-12">
@@ -22,7 +22,7 @@ const WishList = () => {
             <div key={item._id}>
               <div className="grid grid-cols-3 items-center mb-4">
                 <div>
-                  <img src={item.images[0]} className="w-20 h-20" alt="" />
+                  <img src={`${backendrl}/${item.images[0]}`} className="w-20 h-20" alt="" />
                   <p>{item.name}</p>
                 </div>
 

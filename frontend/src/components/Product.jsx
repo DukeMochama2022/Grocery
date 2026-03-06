@@ -4,7 +4,7 @@ import { AppContext } from "../context/AppContext";
 import ProductCard from "./ProductCard";
 
 const Product = () => {
-  const { productsData, navigate } = useContext(AppContext);
+  const { products } = useContext(AppContext);
   return (
     <div className="py-12">
       <div className="flex items-center">
@@ -20,7 +20,7 @@ const Product = () => {
         className="grid grid-cols-1 mt-6  sm:grid-cols-2 md:grid-cols-3
        lg:grid-cols-4 xl:grid-cols-4 items-center justify-center gap-4"
       >
-        {productsData.map((product) => (
+        {products.map((product) => (
           <ProductCard
             key={product._id}
             product={product}

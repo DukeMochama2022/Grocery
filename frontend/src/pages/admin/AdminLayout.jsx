@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const AdminLayout = () => {
-  const { setAdmin, navigate } = useContext(AppContext);
+  const { setAdmin, navigate, backendUrl, axios } = useContext(AppContext);
   const location = useLocation();
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const menuItems = [
@@ -61,16 +61,28 @@ const AdminLayout = () => {
     return location.pathname === path;
   };
 
-  const logout = () => {
-    setAdmin(false);
-    navigate("/");
-    toast.success("Logout successiful!");
+  const logout = async () => {
+    try {
+      const { data } = await axios.get(backendUrl + "/api/admin/logout");
+      if (data.success) {
+        toast.success(data.message);
+        setAdmin(false);
+        navigate("/");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   return (
     <div className="flex  h-screen bg-gray-100">
       {/* mobile menu */}
       <div className="lg:hidden fixed top-4 left-4 z-50">
-        <button className="p-2 bg-white hover:bg-gray-50 transition-colors rounded-md">
+        <button
+          onClick={() => setSideBarOpen(!sideBarOpen)}
+          className="p-2 bg-white hover:bg-gray-50 transition-colors rounded-md"
+        >
           {sideBarOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -78,7 +90,7 @@ const AdminLayout = () => {
       {/* Side bar */}
       <div
         className={`fixed  inset-y-0 left-0 z-40 w-64 bg-white shadow-xl transform transition-transform 
-      ese-in-out lg:translate-x-0 lg:static lg:inset-0 tduration-300 ${
+      ease-in-out lg:translate-x-0 lg:static lg:inset-0 duration-300 ${
         sideBarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
       >
@@ -155,7 +167,16 @@ const AdminLayout = () => {
               <div className="text-sm text-gray-500">
                 <p
                   onClick={logout}
-                  className="cursor-pointer  bg-primary py-1 rounded-full px-3 text-gray-100 text-lg font-semibold"
+                  className="cursor-pointer
+                  px-4 py-2
+                  text-sm font-semibold
+                  text-primary
+                  border border-primary
+                  rounded-md
+                  hover:bg-primary
+                  hover:text-white
+                  transition-all
+                  duration-200"
                 >
                   logout
                 </p>
@@ -166,9 +187,8 @@ const AdminLayout = () => {
         {/* Page content */}
         <main className="flex-1 overflow-x-hidden overflow-y-auto p-6">
           <div className="max-w-7xl mx-auto">
-            <Outlet/>
+            <Outlet />
           </div>
-
         </main>
       </div>
     </div>

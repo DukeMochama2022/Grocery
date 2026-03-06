@@ -5,30 +5,31 @@ import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
 const ProductCard = ({ product }) => {
-  const { currency, navigate, addToCart } = useContext(AppContext);
+  const { currency, addToCart, backendUrl } = useContext(AppContext);
   return (
     <div
-      className="w-[250px] h-[350px] rounded-xl b-[#FAFAFA] p-[20px] hover:border hover:border-secondary hover:transform 
+      className="w-[250px] h-[350px] rounded-xl b-[#FAFAFA] p-[20px] border-1 border-amber-300 hover:border hover:border-secondary hover:transform 
     hover:scale-105 transition-all ease-in-out duration-300"
     >
       <div className="flex justify-between gap-4">
-        <p>{product.weight}</p>
-        <h3 className="text-primary font-bold ">{product.discount}</h3>
+        <p className="font-bold text-primary">{product.weight}</p>
       </div>
       <div className="cursor-pointer">
         <Link to={`/product/${product._id}`} className="cursor-pointer">
-          <img src={product.images[0]} alt="" />
+          <img src={backendUrl + `${product.images[0]}`} alt="" />
         </Link>
       </div>
       <button
         onClick={() => addToCart(product)}
-        className="flex items-center justify-center rounded mb-3 w-full py-1 bg-secondary text-white cursor-pointer"
+        className="flex items-center justify-center rounded mb-3 w-full py-1 bg-secondary mt-3 text-white cursor-pointer"
       >
         <ShoppingCart />
       </button>
       <hr className="w-full" />
       <div>
-        <p className="text-secondary text-sm font-normal">{product.category}</p>
+        <p className="text-secondary text-sm font-normal">
+          {product.category?.name}
+        </p>
         <h2 className="text-lg font-semibold text-gray-800">{product.name}</h2>
       </div>
 

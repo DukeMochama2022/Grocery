@@ -6,7 +6,8 @@ import { AppContext } from "../../context/AppContext";
 import { Upload } from "lucide-react";
 
 const AddCategory = () => {
-  const { navigate, loading, setLoading } = useContext(AppContext);
+  const { navigate, loading, setLoading, axios, backendUrl,fetchCategories } =
+    useContext(AppContext);
   const [formData, setFormData] = useState({ name: "", image: null });
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -24,10 +25,39 @@ const AddCategory = () => {
       setPreview(URL.createObjectURL(selectedFile));
     }
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/admin/categories");
-    toast.success("Category added successfully.");
+    try {
+      const dataToSend = new FormData();
+      dataToSend.append("name", formData.name);
+      dataToSend.append("image", formData.image);
+
+      setLoading(true);
+      const { data } = await axios.post(
+        backendUrl + "/api/category/create",
+        dataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (data.success) {
+        toast.success(data.message);
+        fetchCategories();
+        navigate("/admin/categories");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      const msg =
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong!";
+      toast.error(msg);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="py-12">

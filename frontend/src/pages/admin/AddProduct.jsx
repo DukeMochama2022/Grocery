@@ -6,7 +6,8 @@ import toast from "react-hot-toast";
 import { AppContext } from "../../context/AppContext";
 
 const AddProduct = () => {
-  const { navigate, categoriesData, loading } = useContext(AppContext);
+  const { navigate, categories, loading, axios, backendUrl } =
+    useContext(AppContext);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -39,10 +40,48 @@ const AddProduct = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/admin/products");
-    toast.success("Product added successfully.");
+    try {
+      const form = new FormData();
+
+      // text fields
+      form.append("name", formData.name);
+      form.append("price", formData.price);
+      form.append("offerPrice", formData.offerPrice);
+      form.append("smallDesc", formData.smallDesc);
+      form.append("longDesc", formData.longDesc);
+      form.append("weight", formData.weight);
+      form.append("category", formData.category);
+
+      formData.images.forEach((image) => {
+        if (image) {
+          form.append("images", image);
+        }
+      });
+      const { data } = await axios.post(
+        backendUrl + "/api/product/create",
+        form,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+        navigate("/admin/products");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      const msg =
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to add product.";
+        toast.error(msg)
+    }
   };
 
   return (
@@ -163,7 +202,7 @@ const AddProduct = () => {
                    focus:ring-secondary focus:ring-2 focus:border-transparent block w-full p-2.5"
               >
                 <option value="">Select a category</option>
-                {categoriesData.map((category) => (
+                {categories.map((category) => (
                   <option key={category._id} value={category._id}>
                     {category.name}
                   </option>
@@ -213,7 +252,7 @@ const AddProduct = () => {
                   className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer
                  hover:border-secondary transition overflow-hidden"
                 >
-                  {previews[index]? (
+                  {previews[index] ? (
                     <img
                       src={previews[index]}
                       className=" h-full object-contain"
@@ -228,7 +267,7 @@ const AddProduct = () => {
                     </>
                   )}
                 </label>
-                {formData.images[index]&& (
+                {formData.images[index] && (
                   <p className="text-xs text-gray-500 mt-1 text-center">
                     {formData.images[index].name}
                   </p>

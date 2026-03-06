@@ -6,7 +6,7 @@ import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 
 const AddAddress = () => {
-  const { navigate } = useContext(AppContext);
+  const { navigate,axios,backendUrl,loading,setLoading } = useContext(AppContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,11 +18,29 @@ const AddAddress = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    toast.success("Address added successifully !");
-    navigate("/checkout")
+    try {
+      setLoading(true);
+      const { data } = await axios.post(backendUrl + "/api/address/add", formData);
+      if (data.success) {
+        toast.success(data.message);
+        navigate("/checkout")
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      const msg =
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong!";
+      toast.error(msg);
+    } finally {
+      setLoading(false);
+    }
+   
+
+    
   };
   return (
     <div
@@ -87,7 +105,7 @@ const AddAddress = () => {
           <div className="text-white flex flex-col gap-2 mb-4">
             <label htmlFor="zipCode">Zip code</label>
             <input
-              type="number"
+              type="text"
               placeholder="Enter your country"
               required
               name="zipCode"
@@ -108,7 +126,8 @@ const AddAddress = () => {
               className="w-full border border-white outline-none py-3 rounded p-2"
             />
           </div>
-          <button className="bg-primary w-full rounded-md text-white cursor-pointer px-6 py-2">Add Address</button>
+          <button className="bg-primary w-full rounded-md text-white cursor-pointer px-6 py-2">
+            {loading ? "Please wait..." : "Add Address"}</button>
         </form>
       </div>
     </div>

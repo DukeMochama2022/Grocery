@@ -1,31 +1,109 @@
 import { useState } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { products, categories, blogs } from "../assets/assets";
+import { blogs } from "../assets/assets";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
+  axios.defaults.withCredentials = true;
+
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [categoriesData, setCategoriesData] = useState([]);
-  const [productsData, setProductsData] = useState([]);
+  const [categories, setCategoriesData] = useState([]);
+  const [products, setProductsData] = useState([]);
   const [blogsData, setBlogsData] = useState([]);
-
   const [cart, setCart] = useState([]);
   const [favourite, setFavourite] = useState([]);
+  const [addresses, setAddresses] = useState([]);
+
+  const [stats, setStats] = useState({
+    users: 0,
+    products: 0,
+    categories: 0,
+  });
+
   const currency = import.meta.env.VITE_CURRENCY;
 
+  const checkAuth = async () => {
+    try {
+      const { data } = await axios.get(`${backendUrl}/api/auth/is-auth`);
+      if (data.success) {
+        setUser(true);
+      }
+    } catch (error) {
+      setUser(null);
+    } finally {
+    }
+  };
+
+  const checkAdmin = async () => {
+    try {
+      const { data } = await axios.get(`${backendUrl}/api/admin/is-admin`, {
+      });
+      if (data.success) {
+        setAdmin(true);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   const fetchCategories = async () => {
-    setCategoriesData(categories);
+    try {
+      const { data } = await axios.get(backendUrl + "/api/category/all");
+      if (data.success) {
+        setCategoriesData(data.categories);
+      } else {
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const fetchProducts = async () => {
-    setProductsData(products);
+    try {
+      const { data } = await axios.get(backendUrl + "/api/product/all");
+      if (data.success) {
+        setProductsData(data.products);
+      } else {
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchStats = async () => {
+    try {
+      const { data } = await axios.get(
+        backendUrl + "/api/dashboard/statistics"
+      );
+      if (data.success) {
+        setStats(data.stats);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchAddress = async () => {
+    try {
+      const { data } = await axios.get(backendUrl + "/api/address/get");
+      if (data.success) {
+        setAddresses(data.addresses);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const fetchBlogs = async () => {
@@ -96,6 +174,10 @@ const AppContextProvider = ({ children }) => {
     fetchCategories();
     fetchProducts();
     fetchBlogs();
+    checkAuth();
+    checkAdmin();
+    fetchStats();
+    fetchAddress();
   }, []);
 
   const value = {
@@ -104,8 +186,8 @@ const AppContextProvider = ({ children }) => {
     setUser,
     admin,
     setAdmin,
-    categoriesData,
-    productsData,
+    categories,
+    products,
     currency,
     blogsData,
     addToCart,
@@ -117,6 +199,14 @@ const AppContextProvider = ({ children }) => {
     getCartTotal,
     loading,
     setLoading,
+    axios,
+    backendUrl,
+    fetchCategories,
+    fetchProducts,
+    stats,
+    fetchStats,
+    addresses,
+    fetchAddress,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

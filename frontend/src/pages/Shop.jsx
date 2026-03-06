@@ -6,16 +6,16 @@ import { useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 
 const Shop = () => {
-  const { productsData, navigate } = useContext(AppContext);
+  const { products, navigate } = useContext(AppContext);
   const [input, setInput] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(productsData);
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
   const handleSearch = () => {
     const query = input.toLowerCase().trim();
     if (query ==="") {
-      setFilteredProducts(productsData);
+      setFilteredProducts(products);
     } else {
-      const result = productsData.filter((product) =>
+      const result = products.filter((product) =>
         product.name.toLowerCase().includes(query)
       );
       setFilteredProducts(result);
@@ -23,7 +23,7 @@ const Shop = () => {
   };
   useEffect(() => {
     handleSearch();
-  }, [input, productsData]);
+  }, [input, products]);
   return (
     <div className="py-12 px-4 md:px-8 lg:px-16">
       <div className="flex items-center justify-center mt-10">

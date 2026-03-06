@@ -9,7 +9,8 @@ import { AppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
 
 const NavBar = () => {
-  const { navigate, user, setUser, cart, favourite } = useContext(AppContext);
+  const { navigate, user, setUser, cart, favourite, axios,backendUrl } =
+    useContext(AppContext);
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
@@ -19,10 +20,19 @@ const NavBar = () => {
       : "";
   };
 
-  const logout = () => {
-    setUser(null);
-    toast.success("Logout successful");
-    navigate("/");
+  const logout = async () => {
+    try {
+      const { data } = await axios.post(backendUrl+"/api/auth/logout");
+      if (data.success) {
+        toast.success(data.message);
+        setUser(false);
+        navigate("/");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   return (
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">

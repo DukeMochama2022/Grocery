@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
 const Category = () => {
-  const { categoriesData } = useContext(AppContext);
+  const { categories,backendUrl } = useContext(AppContext);
 
   const colors = [
     "bg-red-300",
@@ -39,7 +39,7 @@ const Category = () => {
           0: {
             slidesPerView: 2,
           },
-         
+
           768: {
             slidesPerView: 3,
           },
@@ -49,7 +49,7 @@ const Category = () => {
         }}
         className="w-full my-5"
       >
-        {categoriesData.map((category, index) => (
+        {categories.map((category, index) => (
           <SwiperSlide key={index}>
             <motion.div
               whileHover={{ rotate: 360 }}
@@ -57,7 +57,11 @@ const Category = () => {
               className={`w-[130px] md:w-[150px] h-[170px] rounded-md ${colors[index]}  flex flex-col 
               items-center justify-center cursor-pointer hover:scale-105 transition-all duration-300`}
             >
-              <img src={category.image} alt="" className="w-32 h-32" />
+              <img
+                src={backendUrl + `${category.image}`}
+                alt=""
+                className="w-full h-full"
+              />
               <h3 className="text-lg font-semibold text-gray-800">
                 {category.name}
               </h3>

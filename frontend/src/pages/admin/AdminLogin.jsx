@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 
 const adminLogin = () => {
-  const { navigate, setAdmin } = useContext(AppContext);
+  const { navigate, setAdmin, backendUrl, axios } = useContext(AppContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,12 +17,27 @@ const adminLogin = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    toast.success("Login successful");
-    setAdmin(true);
-    navigate("/admin");
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/admin/login",
+        formData
+      );
+      if (data.success) {
+        toast.success(data.message);
+      } else {
+        return toast.error(data.message);
+      }
+      setAdmin(true);
+      navigate("/admin");
+    } catch (error) {
+      const msg =
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong!";
+        toast.error(msg)
+    }
   };
   return (
     <div
@@ -63,7 +78,6 @@ const adminLogin = () => {
           <button className="bg-primary text-white  cursor-pointer w-full py-3 rounded">
             Login
           </button>
-
         </form>
       </div>
     </div>
